@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>240hzfps | Mis Redes</title>
+  <!-- Biblioteca de íconos oficiales -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
   <style>
     * {
       box-sizing: border-box;
@@ -17,91 +20,156 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      /* FONDO DE PANTALLA - Revisa si subiste fondo.png o fondo.jpg */
+      /* Tu fondo */
       background: url('fondo.png.png') no-repeat center center/cover fixed;
       padding: 20px;
     }
 
     .card {
-      background: rgba(0, 0, 0, 0.75);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      padding: 25px 25px 35px 25px; /* Ajuste ligero de padding superior */
-      border-radius: 20px;
+      background: rgba(12, 12, 16, 0.78);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      padding: 30px 25px 35px 25px;
+      border-radius: 22px;
       width: 100%;
       max-width: 360px;
       text-align: center;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
-      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.12);
       display: flex;
       flex-direction: column;
       align-items: center;
     }
 
-    /* ESTILO PARA LA IMAGEN DE PERFIL CIRCULAR */
     .profile-img {
-      width: 90px;  /* Ancho de la imagen */
-      height: 90px; /* Alto de la imagen */
-      border-radius: 50%; /* Esto la hace circular */
-      object-fit: cover; /* Recorta la imagen para que encaje sin estirarse */
-      border: 3px solid #ffffff; /* Borde blanco fino */
-      margin-bottom: 15px; /* Espacio con el nombre */
-      box-shadow: 0 4px 10px rgba(0,0,0,0.5); /* Sombra suave */
+      width: 95px;
+      height: 95px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #ffffff;
+      margin-bottom: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+      transition: transform 0.3s ease;
+    }
+
+    .profile-img:hover {
+      transform: scale(1.06);
     }
 
     h1 {
       color: #ffffff;
-      font-size: 20px; /* Un poco más pequeño para equilibrar */
-      margin-bottom: 6px;
+      font-size: 21px;
+      margin-bottom: 5px;
+      letter-spacing: 0.5px;
     }
 
     p {
-      color: #cccccc;
+      color: #a0a0a5;
       font-size: 14px;
-      margin-bottom: 25px;
+      margin-bottom: 22px;
     }
 
     .links {
       display: flex;
       flex-direction: column;
       gap: 12px;
-      width: 100%; /* Botones a ancho completo de la tarjeta */
+      width: 100%;
     }
 
+    /* Estilo base de los botones interactivos */
     .btn {
-      display: block;
-      padding: 13px;
-      background: #ffffff;
-      color: #111111;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 13px 18px;
+      color: #ffffff;
       text-decoration: none;
       font-weight: 600;
       font-size: 15px;
       border-radius: 12px;
-      transition: all 0.2s ease;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.06);
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    .btn:hover {
-      background: #e6e6e6;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+    /* Twitch: Púrpura */
+    .btn.twitch:hover {
+      background: #9146FF;
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 6px 20px rgba(145, 70, 255, 0.45);
+      border-color: #9146FF;
+    }
+
+    /* YouTube: Rojo */
+    .btn.youtube:hover {
+      background: #FF0000;
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 6px 20px rgba(255, 0, 0, 0.45);
+      border-color: #FF0000;
+    }
+
+    /* TikTok: Efecto cian/magenta */
+    .btn.tiktok:hover {
+      background: #010101;
+      border-color: #25F4EE;
+      box-shadow: -3px -3px 12px rgba(37, 244, 238, 0.5), 3px 3px 12px rgba(254, 44, 85, 0.5);
+      transform: translateY(-3px) scale(1.02);
+      color: #ffffff;
+    }
+
+    /* Instagram: Degradado */
+    .btn.instagram:hover {
+      background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 6px 20px rgba(220, 39, 67, 0.45);
+      border-color: transparent;
+    }
+
+    /* Discord: Blurple */
+    .btn.discord:hover {
+      background: #5865F2;
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 6px 20px rgba(88, 101, 242, 0.45);
+      border-color: #5865F2;
+    }
+
+    /* Click rápido */
+    .btn:active {
+      transform: translateY(0) scale(0.98);
     }
   </style>
 </head>
 <body>
 
   <div class="card">
-    <!-- AQUÍ SE AGREGA LA IMAGEN DE PERFIL -->
-    <!-- Cambia 'perfil.png' por el nombre exacto de tu archivo si subiste .jpg -->
-    <img src="perfil.png" alt="Foto de Perfil" class="profile-img">
+    <!-- Tu foto de perfil -->
+    <img src="perfil.png" alt="Foto de perfil" class="profile-img">
 
     <h1>@240hzfps</h1>
-    <p>Mis redes oficiales</p>
+    <p>Mis redes sociales oficiales</p>
 
+    <!-- Enlaces con clases de estilo e íconos -->
     <div class="links">
-      <a href="https://www.twitch.tv/240hzfpss" target="_blank" class="btn">Twitch</a>
-      <a href="https://youtube.com/" target="_blank" class="btn">YouTube</a>
-      <a href="https://www.instagram.com/240hz______/?hl=es" target="_blank" class="btn">Instagram</a>
-      <a href="https://www.tiktok.com/@240hzfps" target="_blank" class="btn">TikTok</a>
+      <a href="https://twitch.tv/tu_canal" target="_blank" class="btn twitch">
+        <i class="fa-brands fa-twitch"></i> Twitch
+      </a>
+      
+      <a href="https://youtube.com/@tu_canal" target="_blank" class="btn youtube">
+        <i class="fa-brands fa-youtube"></i> YouTube
+      </a>
+
+      <a href="https://tiktok.com/@tu_usuario" target="_blank" class="btn tiktok">
+        <i class="fa-brands fa-tiktok"></i> TikTok
+      </a>
+
+      <a href="https://instagram.com/tu_usuario" target="_blank" class="btn instagram">
+        <i class="fa-brands fa-instagram"></i> Instagram
+      </a>
+
+      <a href="https://discord.gg/tu_servidor" target="_blank" class="btn discord">
+        <i class="fa-brands fa-discord"></i> Discord
+      </a>
     </div>
   </div>
 
