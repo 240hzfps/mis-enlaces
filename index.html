@@ -1,298 +1,508 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>240hzfps | Mis Redes</title>
-  <!-- Biblioteca de íconos oficiales -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>240hzfps | Web Oficial</title>
 
-    body {
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: url('fondo.png.png') no-repeat center center/cover fixed;
-      padding: 20px;
-      overflow-x: hidden;
-      position: relative;
-    }
+    <!-- SEO y Redes Sociales -->
+    <meta name="description" content="Sitio web oficial de 240hzfps. Creador de contenido gamer, directos, clips competitivos y setup.">
+    <meta name="keywords" content="240hzfps, gamer, setup, 9800X3D, rtx 5080, twitch, youtube, discord, 240hz">
+    <meta name="author" content="240hzfps">
+    <meta name="robots" content="index, follow">
 
-    /* Lienzo para los rayos morados animados */
-    #lightning-canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none; /* Permite hacer clic a través de él */
-      z-index: 1;
-      mix-blend-mode: screen; /* Fusión perfecta de luz brillante con tu fondo */
-    }
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://240hzfps.xyz/">
+    <meta property="og:title" content="240hzfps | Web Oficial">
+    <meta property="og:description" content="Redes sociales, directos y setup gamer de 240hzfps.">
+    <meta property="og:image" content="https://240hzfps.xyz/perfil.png.jpg">
 
-    .card {
-      position: relative;
-      z-index: 2; /* Siempre por encima de los rayos */
-      background: rgba(12, 10, 18, 0.82);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      padding: 30px 25px 35px 25px;
-      border-radius: 22px;
-      width: 100%;
-      max-width: 360px;
-      text-align: center;
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8), 0 0 25px rgba(168, 85, 247, 0.25);
-      border: 1px solid rgba(168, 85, 247, 0.25);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+    <!-- Fuentes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
 
-    .profile-img {
-      width: 95px;
-      height: 95px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 3px solid #a855f7; /* Borde morado neón sutil */
-      margin-bottom: 12px;
-      box-shadow: 0 0 15px rgba(168, 85, 247, 0.6);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
 
-    .profile-img:hover {
-      transform: scale(1.08);
-      box-shadow: 0 0 25px rgba(192, 132, 252, 0.9);
-    }
+        body {
+            background-color: #08060e;
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+            padding: 20px 15px;
+        }
 
-    h1 {
-      color: #ffffff;
-      font-size: 21px;
-      margin-bottom: 5px;
-      letter-spacing: 0.5px;
-      text-shadow: 0 0 8px rgba(168, 85, 247, 0.5);
-    }
+        /* Canvas de rayos de fondo */
+        #lightningCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
 
-    p {
-      color: #b3b3c2;
-      font-size: 14px;
-      margin-bottom: 22px;
-    }
+        /* Contenedor Principal */
+        .container {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 420px;
+        }
 
-    .links {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      width: 100%;
-    }
+        /* Tarjeta Glassmorphism */
+        .profile-card {
+            background: rgba(13, 10, 22, 0.85);
+            border: 1px solid rgba(168, 85, 247, 0.45);
+            box-shadow: 0 0 35px rgba(147, 51, 234, 0.35);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-radius: 24px;
+            padding: 32px 24px;
+            text-align: center;
+        }
 
-    .btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      padding: 13px 18px;
-      color: #ffffff;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 15px;
-      border-radius: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      background: rgba(255, 255, 255, 0.06);
-      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-    }
+        /* Avatar */
+        .avatar-wrap {
+            position: relative;
+            width: 96px;
+            height: 96px;
+            margin: 0 auto 16px;
+        }
 
-    /* Twitch: Púrpura */
-    .btn.twitch:hover {
-      background: #9146FF;
-      transform: translateY(-3px) scale(1.02);
-      box-shadow: 0 6px 20px rgba(145, 70, 255, 0.55);
-      border-color: #9146FF;
-    }
+        .avatar-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #c084fc;
+            box-shadow: 0 0 20px rgba(192, 132, 252, 0.6);
+        }
 
-    /* YouTube: Rojo */
-    .btn.youtube:hover {
-      background: #FF0000;
-      transform: translateY(-3px) scale(1.02);
-      box-shadow: 0 6px 20px rgba(255, 0, 0, 0.5);
-      border-color: #FF0000;
-    }
+        .username {
+            font-size: 1.4rem;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            color: #ffffff;
+            margin-bottom: 4px;
+        }
 
-    /* TikTok: Neón cian/magenta */
-    .btn.tiktok:hover {
-      background: #010101;
-      border-color: #25F4EE;
-      box-shadow: -3px -3px 12px rgba(37, 244, 238, 0.6), 3px 3px 12px rgba(254, 44, 85, 0.6);
-      transform: translateY(-3px) scale(1.02);
-      color: #ffffff;
-    }
+        .tagline {
+            font-size: 0.85rem;
+            color: #a855f7;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
 
-    /* Instagram: Degradado */
-    .btn.instagram:hover {
-      background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-      transform: translateY(-3px) scale(1.02);
-      box-shadow: 0 6px 20px rgba(220, 39, 67, 0.5);
-      border-color: transparent;
-    }
+        /* Lista de Enlaces */
+        .links-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
 
-    /* Discord: Blurple */
-    .btn.discord:hover {
-      background: #5865F2;
-      transform: translateY(-3px) scale(1.02);
-      box-shadow: 0 6px 20px rgba(88, 101, 242, 0.5);
-      border-color: #5865F2;
-    }
+        .link-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 14px 20px;
+            border-radius: 14px;
+            text-decoration: none;
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 0.95rem;
+            background: rgba(22, 17, 36, 0.8);
+            border: 1px solid rgba(168, 85, 247, 0.35);
+            transition: all 0.25s ease;
+            cursor: pointer;
+            width: 100%;
+        }
 
-    .btn:active {
-      transform: translateY(0) scale(0.98);
-    }
-  </style>
+        .link-btn:hover, .link-btn:active {
+            transform: translateY(-2px);
+            box-shadow: 0 0 22px rgba(168, 85, 247, 0.5);
+            border-color: #c084fc;
+        }
+
+        /* Botón de Setup destacado */
+        .setup-trigger {
+            background: linear-gradient(135deg, rgba(88, 28, 135, 0.6), rgba(147, 51, 234, 0.4));
+            border: 1px solid #c084fc;
+            box-shadow: 0 0 15px rgba(192, 132, 252, 0.3);
+        }
+
+        .setup-trigger:hover {
+            box-shadow: 0 0 25px rgba(192, 132, 252, 0.7);
+        }
+
+        .btn-icon {
+            font-size: 1.15rem;
+        }
+
+        /* Footer sutil */
+        .card-footer {
+            margin-top: 24px;
+            font-size: 0.75rem;
+            color: #94a3b8;
+            letter-spacing: 0.5px;
+        }
+
+        /* ================= MODAL SETUP ================= */
+        .modal-backdrop {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(5, 3, 10, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 100;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.25s ease;
+        }
+
+        .modal-backdrop.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-card {
+            background: rgba(14, 10, 24, 0.96);
+            border: 1px solid rgba(192, 132, 252, 0.5);
+            box-shadow: 0 0 35px rgba(168, 85, 247, 0.4);
+            border-radius: 22px;
+            width: 100%;
+            max-width: 460px;
+            padding: 22px;
+            transform: scale(0.92);
+            transition: transform 0.25s ease;
+        }
+
+        .modal-backdrop.active .modal-card {
+            transform: scale(1);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(168, 85, 247, 0.25);
+            padding-bottom: 12px;
+            margin-bottom: 14px;
+        }
+
+        .modal-header h3 {
+            font-size: 0.92rem;
+            color: #ffffff;
+            letter-spacing: 0.8px;
+            font-weight: 700;
+        }
+
+        .modal-close {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(168, 85, 247, 0.4);
+            color: #c084fc;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            transition: 0.2s;
+        }
+
+        .modal-close:hover {
+            background: rgba(168, 85, 247, 0.3);
+            color: #fff;
+        }
+
+        .specs-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 9px;
+        }
+
+        .spec-item {
+            background: rgba(22, 17, 36, 0.9);
+            border: 1px solid rgba(168, 85, 247, 0.22);
+            border-radius: 12px;
+            padding: 9px 14px;
+            position: relative;
+            overflow: hidden;
+            text-align: left;
+        }
+
+        .spec-item::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+        }
+
+        .spec-item.cpu::before { background: #ff5a1e; }
+        .spec-item.gpu::before { background: #1ed760; }
+        .spec-item.monitor::before { background: #25f4ee; }
+        .spec-item.mobo::before { background: #a855f7; }
+        .spec-item.kb::before { background: #f59e0b; }
+        .spec-item.mouse::before { background: #ff4b78; }
+
+        .spec-cat {
+            display: block;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            margin-bottom: 2px;
+        }
+
+        .spec-item.cpu .spec-cat { color: #ff5a1e; }
+        .spec-item.gpu .spec-cat { color: #1ed760; }
+        .spec-item.monitor .spec-cat { color: #25f4ee; }
+        .spec-item.mobo .spec-cat { color: #c084fc; }
+        .spec-item.kb .spec-cat { color: #f59e0b; }
+        .spec-item.mouse .spec-cat { color: #ff4b78; }
+
+        .spec-val {
+            color: #ffffff;
+            font-size: 0.88rem;
+            font-weight: 500;
+        }
+
+        .modal-btn-close {
+            width: 100%;
+            margin-top: 16px;
+            padding: 12px;
+            background: #9333ea;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(147, 51, 234, 0.4);
+            transition: 0.2s;
+        }
+
+        .modal-btn-close:hover {
+            background: #a855f7;
+            box-shadow: 0 0 22px rgba(168, 85, 247, 0.7);
+        }
+    </style>
 </head>
 <body>
 
-  <!-- Lienzo de animación de rayos -->
-  <canvas id="lightning-canvas"></canvas>
+    <!-- Fondo de rayos morados interactivo -->
+    <canvas id="lightningCanvas"></canvas>
 
-  <div class="card">
-    <img src="perfil.png.jpg" alt="Foto de perfil" class="profile-img">
+    <!-- Tarjeta Principal -->
+    <main class="container">
+        <div class="profile-card">
+            
+            <div class="avatar-wrap">
+                <!-- Imagen de perfil -->
+                <img src="perfil.png.jpg" alt="240hzfps" class="avatar-img" onerror="this.src='https://github.com/240hzfps.png'">
+            </div>
 
-    <h1>@240hzfps</h1>
-    <p>Mis redes sociales oficiales</p>
+            <h1 class="username">@240hzfps</h1>
+            <p class="tagline">Redes Oficiales</p>
 
-    <div class="links">
-      <a href="https://www.twitch.tv/240hzfpss" target="_blank" class="btn twitch">
-        <i class="fa-brands fa-twitch"></i> Twitch
-      </a>
-      
-      <a href="https://youtube.com/" target="_blank" class="btn youtube">
-        <i class="fa-brands fa-youtube"></i> YouTube
-      </a>
+            <div class="links-group">
+                <!-- Twitch -->
+                <a href="https://twitch.tv" target="_blank" rel="noopener" class="link-btn">
+                    <span class="btn-icon">🟣</span>
+                    <span>Twitch</span>
+                </a>
 
-      <a href="https://www.tiktok.com/@240hzfps" target="_blank" class="btn tiktok">
-        <i class="fa-brands fa-tiktok"></i> TikTok
-      </a>
+                <!-- YouTube -->
+                <a href="https://youtube.com" target="_blank" rel="noopener" class="link-btn">
+                    <span class="btn-icon">🔴</span>
+                    <span>YouTube</span>
+                </a>
 
-      <a href="https://www.instagram.com/240hz______/?hl=es" target="_blank" class="btn instagram">
-        <i class="fa-brands fa-instagram"></i> Instagram
-      </a>
+                <!-- TikTok -->
+                <a href="https://tiktok.com" target="_blank" rel="noopener" class="link-btn">
+                    <span class="btn-icon">⬛</span>
+                    <span>TikTok</span>
+                </a>
 
-      <a href="https://discord.gg/" target="_blank" class="btn discord">
-        <i class="fa-brands fa-discord"></i> Discord
-      </a>
+                <!-- Discord -->
+                <a href="https://discord.com" target="_blank" rel="noopener" class="link-btn">
+                    <span class="btn-icon">💬</span>
+                    <span>Discord</span>
+                </a>
+
+                <!-- Botón Modal Setup -->
+                <button type="button" class="link-btn setup-trigger" onclick="toggleSetupModal(true)">
+                    <span class="btn-icon">⚡</span>
+                    <span>Mi Setup / Specs</span>
+                </button>
+            </div>
+
+            <div class="card-footer">
+                ⚡ 240Hz Ready • 240hzfps.xyz
+            </div>
+        </div>
+    </main>
+
+    <!-- Ventana Emergente (Modal Setup) -->
+    <div id="setupModal" class="modal-backdrop" onclick="handleBackdropClick(event)">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>⚡ MI SETUP // 240HZFPS BATTLESTATION</h3>
+                <button type="button" class="modal-close" onclick="toggleSetupModal(false)">✕</button>
+            </div>
+            
+            <div class="specs-grid">
+                <div class="spec-item cpu">
+                    <span class="spec-cat">PROCESADOR</span>
+                    <span class="spec-val">AMD Ryzen 7 9800X3D</span>
+                </div>
+                <div class="spec-item gpu">
+                    <span class="spec-cat">TARJETA GRÁFICA</span>
+                    <span class="spec-val">NVIDIA GeForce RTX 5080 Gigabyte</span>
+                </div>
+                <div class="spec-item monitor">
+                    <span class="spec-cat">MONITOR</span>
+                    <span class="spec-val">Samsung Odyssey G6 27" • 240Hz OLED</span>
+                </div>
+                <div class="spec-item mobo">
+                    <span class="spec-cat">MOTHERBOARD</span>
+                    <span class="spec-val">B650M Aorus Elite AX ICE</span>
+                </div>
+                <div class="spec-item kb">
+                    <span class="spec-cat">TECLADO</span>
+                    <span class="spec-val">SteelSeries Apex Pro (Gen 3)</span>
+                </div>
+                <div class="spec-item mouse">
+                    <span class="spec-cat">MOUSE</span>
+                    <span class="spec-val">Logitech G PRO X Superlight 2 (Black)</span>
+                </div>
+            </div>
+
+            <button type="button" class="modal-btn-close" onclick="toggleSetupModal(false)">Cerrar Ventana</button>
+        </div>
     </div>
-  </div>
 
-  <!-- Script ligero de generación de rayos morados -->
-  <script>
-    const canvas = document.getElementById('lightning-canvas');
-    const ctx = canvas.getContext('2d');
-
-    let width = canvas.width = window.innerWidth;
-    let height = canvas.height = window.innerHeight;
-
-    window.addEventListener('resize', () => {
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
-    });
-
-    let lightnings = [];
-
-    class Lightning {
-      constructor(startX, startY, endX, endY) {
-        this.startX = startX !== undefined ? startX : Math.random() * width;
-        this.startY = startY !== undefined ? startY : 0;
-        this.endX = endX !== undefined ? endX : this.startX + (Math.random() - 0.5) * 350;
-        this.endY = endY !== undefined ? endY : height * (0.6 + Math.random() * 0.4);
-        this.segments = [];
-        this.alpha = 1.0;
-        this.decay = 0.02 + Math.random() * 0.03;
-        this.createSegments(this.startX, this.startY, this.endX, this.endY, 5);
-      }
-
-      createSegments(x1, y1, x2, y2, depth) {
-        if (depth === 0) {
-          this.segments.push({ x1, y1, x2, y2 });
-          return;
+    <!-- Scripts de Rayos y Modal -->
+    <script>
+        // Control del Modal
+        function toggleSetupModal(show) {
+            const modal = document.getElementById('setupModal');
+            if (show) {
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            } else {
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
         }
-        const midX = (x1 + x2) / 2 + (Math.random() - 0.5) * (x2 - x1 + 50);
-        const midY = (y1 + y2) / 2 + (Math.random() - 0.5) * 40;
-        
-        this.createSegments(x1, y1, midX, midY, depth - 1);
-        this.createSegments(midX, midY, x2, y2, depth - 1);
 
-        // Ramificación lateral ocasional
-        if (Math.random() < 0.25 && depth > 2) {
-          const branchEndX = midX + (Math.random() - 0.5) * 160;
-          const branchEndY = midY + Math.random() * 120;
-          this.createSegments(midX, midY, branchEndX, branchEndY, depth - 2);
+        function handleBackdropClick(event) {
+            if (event.target.id === 'setupModal') {
+                toggleSetupModal(false);
+            }
         }
-      }
 
-      draw() {
-        ctx.save();
-        ctx.lineCap = 'round';
-        ctx.lineJoin = 'round';
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') toggleSetupModal(false);
+        });
 
-        // Capa 1: Resplandor morado exterior
-        ctx.strokeStyle = `rgba(168, 85, 247, ${this.alpha * 0.7})`;
-        ctx.lineWidth = 4;
-        ctx.shadowColor = '#c084fc';
-        ctx.shadowBlur = 18;
-        ctx.beginPath();
-        for (const seg of this.segments) {
-          ctx.moveTo(seg.x1, seg.y1);
-          ctx.lineTo(seg.x2, seg.y2);
+        // Motor de Rayos Morados
+        const canvas = document.getElementById('lightningCanvas');
+        const ctx = canvas.getContext('2d');
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+
+        window.addEventListener('resize', () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        });
+
+        function createBolt(x1, y1, x2, y2) {
+            let points = [{x: x1, y: y1}];
+            let steps = 14;
+            let currentX = x1;
+            let currentY = y1;
+            let dx = (x2 - x1) / steps;
+            let dy = (y2 - y1) / steps;
+
+            for (let i = 0; i < steps; i++) {
+                currentX += dx + (Math.random() - 0.5) * 35;
+                currentY += dy + (Math.random() - 0.5) * 15;
+                points.push({x: currentX, y: currentY});
+            }
+            points.push({x: x2, y: y2});
+            return points;
         }
-        ctx.stroke();
 
-        // Capa 2: Centro blanco eléctrico
-        ctx.strokeStyle = `rgba(255, 255, 255, ${this.alpha * 0.95})`;
-        ctx.lineWidth = 1.8;
-        ctx.shadowBlur = 0;
-        ctx.stroke();
-
-        ctx.restore();
-      }
-
-      update() {
-        this.alpha -= this.decay;
-      }
-    }
-
-    // Rayos al mover o hacer clic
-    window.addEventListener('pointerdown', (e) => {
-      lightnings.push(new Lightning(e.clientX + (Math.random() - 0.5) * 100, 0, e.clientX, e.clientY));
-    });
-
-    let frame = 0;
-    function animate() {
-      ctx.clearRect(0, 0, width, height);
-
-      // Generar rayo espontáneo aleatorio
-      frame++;
-      if (frame % 28 === 0 || Math.random() < 0.04) {
-        lightnings.push(new Lightning());
-      }
-
-      for (let i = lightnings.length - 1; i >= 0; i--) {
-        lightnings[i].draw();
-        lightnings[i].update();
-        if (lightnings[i].alpha <= 0) {
-          lightnings.splice(i, 1);
+        let bolts = [];
+        function triggerLightning() {
+            if (Math.random() < 0.04) {
+                let startX = Math.random() * width;
+                let startY = 0;
+                let endX = startX + (Math.random() - 0.5) * 200;
+                let endY = height * (0.4 + Math.random() * 0.5);
+                bolts.push({
+                    points: createBolt(startX, startY, endX, endY),
+                    alpha: 1.0,
+                    width: 2 + Math.random() * 2
+                });
+            }
         }
-      }
 
-      requestAnimationFrame(animate);
-    }
+        function drawLightning() {
+            ctx.clearRect(0, 0, width, height);
 
-    animate();
-  </script>
+            for (let i = bolts.length - 1; i >= 0; i--) {
+                let bolt = bolts[i];
+                ctx.save();
+                ctx.beginPath();
+                ctx.moveTo(bolt.points[0].x, bolt.points[0].y);
+                for (let j = 1; j < bolt.points.length; j++) {
+                    ctx.lineTo(bolt.points[j].x, bolt.points[j].y);
+                }
+
+                // Brillo morado neón
+                ctx.strokeStyle = `rgba(192, 132, 252, ${bolt.alpha})`;
+                ctx.shadowColor = '#a855f7';
+                ctx.shadowBlur = 18;
+                ctx.lineWidth = bolt.width;
+                ctx.stroke();
+
+                ctx.restore();
+                bolt.alpha -= 0.04;
+
+                if (bolt.alpha <= 0) {
+                    bolts.splice(i, 1);
+                }
+            }
+
+            triggerLightning();
+            requestAnimationFrame(drawLightning);
+        }
+
+        drawLightning();
+    </script>
 </body>
 </html>
